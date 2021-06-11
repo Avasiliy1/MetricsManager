@@ -3,3 +3,5 @@
 ################################################################################
 
 /MetricsManager/MetricsManager/obj
+/MetricsManager/.vs/MetricsManager
+/MetricsManager/MetricsManager/bin/Debug/netcoreapp3.1
