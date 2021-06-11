@@ -16,17 +16,17 @@ namespace MetricsManager.Controllers
         [HttpPost("create")]
         public IActionResult Create([FromBody] WeatherForecast input)
         {
-            if (!ModelState.IsValid)
+            if (input.Date == DateTime.MinValue)
             {
-                return Unauthorized(new Error { Message = "Ошибка в передаваемых параметрах!" });
+                return StatusCode(400, new Error { Message = "Дата является обязательным параметрам!" });
             }
             try
             {
                 _holder.Add(input);
             }
-            catch (Exception E)
+            catch
             {
-                return Unauthorized(new Error { Message = "Не удалось добавить, по причине: " + E.Message });
+                return StatusCode(400, new Error { Message = "Не удалось добавить!" });
             }
             return Ok();
         }
@@ -42,15 +42,15 @@ namespace MetricsManager.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Unauthorized(new Error { Message = "Ошибка в передаваемых параметрах!" });
+                return StatusCode(400, new Error { Message = "Ошибка в передаваемых параметрах!" });
             }
             try
             {
                 _holder.Update(input);
             }
-            catch (Exception E)
+            catch
             {
-                return Unauthorized(new Error { Message = "Не удалось обновить, по причине: " + E.Message });
+                return StatusCode(400, new Error { Message = "Не удалось обновить!" });
             }
             return Ok();
         }
@@ -60,15 +60,15 @@ namespace MetricsManager.Controllers
         {
             if (startDate == null)
             {
-                return Unauthorized(new Error { Message = "Не указана StartDate !" });
+                return StatusCode(400, new Error { Message = "Не указана StartDate!" });
             }
             try
             {
                 _holder.Delete(startDate.Value, endDate ?? startDate.Value);
             }
-            catch (Exception E)
+            catch
             {
-                return Unauthorized(new Error { Message = "Не удалось удалить, по причине: " + E.Message });
+                return StatusCode(400, new Error { Message = "Не удалось удалить!" });
             }
             return Ok();
         }
