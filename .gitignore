@@ -1,0 +1,7 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/MetricsManager/MetricsManager/obj
+/MetricsManager/.vs/MetricsManager
+/MetricsManager/MetricsManager/bin/Debug/netcoreapp3.1
